@@ -1,0 +1,14 @@
+@layout("app")
+
+@section("page")
+<div class="w-30 absolute top-20 left-20 text-right">
+  <ul class="line-number">
+    <li value="&nbsp;"></li>
+    @each(l in length)
+      <li value="{{ l }}" class="number"></li>
+    @end
+  </ul>
+</div>
+<pre class="bg-transparent absolute top-27 left-50"><code class="bg-transparent {{ lang }} m-0 p-0">{{ code.code }}</code>
+</pre>
+@end
