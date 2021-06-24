@@ -2,6 +2,14 @@
 
 @section("page")
   <script src="{{ asset('assets/form.js') }}" defer></script>
+  @if(error)
+    <div id="modal" class="flex justify-center items-start fixed z-50 pt-24 w-full h-full bg-modal-container">
+      <div class="flex justify-center items-center text-modal-border relative bg-modal-window border-2 border-modal-border rounded width-auto p-6">
+        <span id="modal-close" class="absolute right-6 top-0 text-red-300 text-2xl font-bold hover:text-red-800 hover:no-underline cursor-pointer">&times;</span>
+        {{ error }}
+      </div>
+    </div>
+  @endif
   <div class="bg-transparent h-full w-full pt-8">
     <form class="h-full w-full" id="snippet" action="{{ route('SnippetsController.store') }}" method="POST">
       <textarea class="bg-transparent border-none resize-none h-full w-full px-4" id="code" name="code" placeholder="Entrez votre code ou glissez un fichier." autofocus required></textarea>

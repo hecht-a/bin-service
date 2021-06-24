@@ -170,7 +170,11 @@ Encore.enableSassLoader();
 | PostCSS or CSS.
 |
 */
-Encore.enablePostCssLoader();
+Encore.enablePostCssLoader((options) => {
+  options.postcssOptions = {
+    config: path.resolve("postcss.config.js"),
+  };
+});
 // Encore.configureCssLoader(() => {})
 
 /*

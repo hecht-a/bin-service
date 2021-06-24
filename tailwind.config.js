@@ -22,6 +22,12 @@ module.exports = {
         100: "#f5c5c5",
         50: "#fbe8e8",
       },
+      modal: {
+        container: "rgba(30,30,30,0.6)",
+        window: "#efefef",
+        border: "#1E1E1EFF",
+        close: "#aaaaaa",
+      },
     },
     borderWidth: {
       none: "none",
@@ -40,6 +46,7 @@ module.exports = {
         "30": "30px",
       },
       inset: {
+        6: "6px",
         20: "20px",
         27: "27px",
         50: "50px",

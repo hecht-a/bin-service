@@ -1,0 +1,18 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+
+* {
+  outline: none;
+  box-sizing: border-box;
+}
+
+pre {
+  outline: none;
+}
+
+.line-number {
+  li::before {
+    content: attr(value);
+  }
+}

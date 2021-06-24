@@ -1,9 +1,9 @@
 // app entrypoint
-import "./app.scss";
+import "../css/app.scss";
 import hljs from "highlight.js";
 import "normalize.css";
 
-hljs.initHighlightingOnLoad();
+hljs.highlightAll();
 const styles = [
   { title: "Default", href: "https://highlightjs.org/static/demo/styles/default.css" },
   { title: "A 11 Y Dark", href: "https://highlightjs.org/static/demo/styles/a11y-dark.css" },
@@ -774,6 +774,15 @@ const styles = [
   { title: "Xt 256", href: "https://highlightjs.org/static/demo/styles/xt256.css" },
 ];
 
+const closeModal = document.querySelector("#modal-close");
+const modal = document.querySelector("#modal");
+
+if (modal) {
+  closeModal.addEventListener("click", () => {
+    modal.classList.add("hidden");
+  });
+}
+
 window.addEventListener("load", (event) => {
   const stylesheet = document.querySelector("link[data='code']");
   if (localStorage.getItem("style")) {
@@ -785,10 +794,7 @@ window.addEventListener("load", (event) => {
     const option = document.createElement("option");
     option.text = style.title;
     option.value = style.href;
-    option.selected =
-      localStorage.getItem("style") && localStorage.getItem("style") === style.href
-        ? "selected"
-        : "";
+    option.selected = localStorage.getItem("style") && localStorage.getItem("style") === style.href;
     select.appendChild(option);
   });
   select.addEventListener("change", (e) => {

@@ -40,7 +40,7 @@ code.addEventListener("drop", (event) => {
   }
   event.preventDefault();
   const file = files[0];
-  const fileExtension = file.name.split(".").pop()?.toLowerCase() ?? "";
+  const fileExtension = file.name.split(".").pop()?.toLowerCase() ?? "txt";
 
   const langIndex = langAliases[fileExtension] ?? langs.indexOf(fileExtension);
   if (
