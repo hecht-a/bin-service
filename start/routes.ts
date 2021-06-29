@@ -26,8 +26,8 @@ Route.get("health", async ({ response }) => {
   return report.healthy ? response.ok(report) : response.badRequest(report);
 });
 
-Route.on("/").redirect("SnippetsController/create");
+Route.on("/").redirect("/health");
 
 Route.resource("snippet", "SnippetsController")
-  .only(["create", "store", "show"])
+  .only(["store", "show"])
   .where("id", /^[A-Z]{6}\.[a-z]{1,5}$/);

@@ -23,6 +23,7 @@ export default class SnippetValidator {
    *     ])
    *    ```
    */
+
   public schema = schema.create({
     code: schema.string(),
     lang: schema.string(),

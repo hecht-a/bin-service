@@ -9,6 +9,7 @@ export default class Snippets extends BaseSchema {
       table.text("code");
       table.string("snippet_id", 6).unique();
       table.string("lang");
+
       /**
        * Uses timestamptz for PostgreSQL and DATETIME2 for MSSQL
        */

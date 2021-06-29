@@ -1,6 +1,5 @@
 import { DateTime } from "luxon";
 import { BaseModel, beforeCreate, column } from "@ioc:Adonis/Lucid/Orm";
-import { UUID } from "../../resources/utils";
 
 export default class Snippet extends BaseModel {
   @column({ isPrimary: true })
@@ -25,4 +24,15 @@ export default class Snippet extends BaseModel {
   public static generateSnippetId(snippet: Snippet) {
     snippet.snippetId = UUID({});
   }
+}
+
+function UUID({ length = 6, uppercase = true }): string {
+  const alpha = "abcdefghijklmnopqrstuvwxyz";
+  return Array.from({ length })
+    .map(() =>
+      uppercase
+        ? alpha[Math.floor(Math.random() * 26)].toUpperCase()
+        : alpha[Math.floor(Math.random() * 26)]
+    )
+    .join("");
 }

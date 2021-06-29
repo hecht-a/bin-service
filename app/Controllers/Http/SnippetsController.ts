@@ -1,48 +1,69 @@
 import { HttpContextContract } from "@ioc:Adonis/Core/HttpContext";
-import { extToLang } from "../../../resources/utils";
 import SnippetValidator from "App/Validators/SnippetValidator";
 import Snippet from "App/Models/Snippet";
-import View from "@ioc:Adonis/Core/View";
 
 export default class SnippetsController {
-  public async create({ view }: HttpContextContract) {
-    View.global("page", "create");
-    return view.render("snippets/create", { langs: extToLang });
-  }
-
-  public async store({ request, response }: HttpContextContract) {
-    View.global("page", "store");
-    View.global("error", "");
-    if (
-      request.headers()["content-length"] !== undefined &&
-      // @ts-ignore
-      !(request.headers()["content-length"] <= 65000)
-    ) {
-      View.global("error", "Snippet is too large.");
-      return response.redirect().toRoute("snippet.create");
-    }
+  public async store({ request }: HttpContextContract) {
     const payload = await request.validate(SnippetValidator);
     const snippet = await Snippet.create(payload);
-    return response
-      .redirect()
-      .toRoute("snippet.show", { id: `${snippet.snippetId}.${payload.lang}` });
+    return { id: `${snippet.snippetId}.${payload.lang}` };
   }
 
-  public async show({ view, response, params }: HttpContextContract) {
-    View.global("page", "show");
-    View.global("error", "");
+  public async show({ params }: HttpContextContract) {
     const [snippetId, ext] = params.id.split(".");
     const code = await Snippet.findBy("snippet_id", snippetId);
     if (!code) {
-      View.global("error", "This snippet doesn't exist.");
-      return response.redirect().toRoute("snippet.create");
+      return { error: "This snippet doesn't exist." };
     }
-    const length = code!.code
-      .split("\n")
-      .filter((val) => val !== "")
-      .map((_, i) => i + 1);
-    length.push(length[length.length - 1] + 1);
 
-    return view.render("snippets/show", { code, length, lang: extToLang[ext] });
+    return { code, length: code.code.split("\n").length, lang: extToLang[ext] };
   }
 }
+
+const obj = {
+  c: "c",
+  cpp: "cpp",
+  cs: "csharp",
+  css: "css",
+  diff: "diff",
+  erl: "erlang",
+  ex: "elixir",
+  go: "go",
+  h: "objectivec",
+  hs: "haskell",
+  html: "html",
+  ini: "ini",
+  java: "java",
+  js: "javascript",
+  json: "json",
+  kt: "kotlin",
+  less: "less",
+  lisp: "lisp",
+  lua: "lua",
+  md: "markdown",
+  php: "php",
+  pl: "perl",
+  py: "python",
+  rb: "ruby",
+  rs: "rust",
+  sass: "sass",
+  scala: "scala",
+  scss: "scss",
+  sh: "bash",
+  sql: "sql",
+  swift: "swift",
+  toml: "toml",
+  ts: "typescript",
+  txt: "text",
+  xml: "xml",
+  yml: "yaml",
+};
+
+const langToExt = Object.keys(obj)
+  .sort()
+  .map((val) => ({ [obj[val]]: val }))
+  .reduce((acc, cur) => Object.assign(acc, cur), {});
+
+const extToLang = Object.keys(langToExt)
+  .map((val) => ({ [langToExt[val]]: val }))
+  .reduce((acc, cur) => Object.assign(acc, cur), {});
