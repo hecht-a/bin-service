@@ -1,5 +1,6 @@
 {
   "name": "bin-service-api",
+  "description": "Snippets service",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -8,6 +9,19 @@
     "dev": "node ace serve --watch",
     "lint": "eslint . --ext=.ts",
     "format": "prettier --write ."
+  },
+  "author": {
+  "name": "HECHT Axel",
+  "email": "axel.hct@gmail.com"
+},
+  "bugs": {
+    "url": "https://github.com/hecht-a/bin-service/issues"
+  },
+  "license": "MIT",
+  "homepage": "https://github.com/hecht-a/bin-service#readme",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/hecht-a/bin-service.git"
   },
   "devDependencies": {
     "@adonisjs/assembler": "^5.0.0",
