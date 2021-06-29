@@ -1,6 +1,6 @@
 {
   "name": "bin-service-api",
-  "description": "Snippets service",
+  "description": "Snippets service API",
   "version": "1.0.0",
   "private": true,
   "scripts": {
@@ -15,13 +15,13 @@
   "email": "axel.hct@gmail.com"
 },
   "bugs": {
-    "url": "https://github.com/hecht-a/bin-service/issues"
+    "url": "https://github.com/hecht-a/bin-service-api/issues"
   },
   "license": "MIT",
-  "homepage": "https://github.com/hecht-a/bin-service#readme",
+  "homepage": "https://github.com/hecht-a/bin-service-api#readme",
   "repository": {
     "type": "git",
-    "url": "git://github.com/hecht-a/bin-service.git"
+    "url": "git://github.com/hecht-a/bin-service-api.git"
   },
   "devDependencies": {
     "@adonisjs/assembler": "^5.0.0",
