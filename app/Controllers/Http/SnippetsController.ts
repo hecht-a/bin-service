@@ -6,17 +6,21 @@ export default class SnippetsController {
   public async store({ request }: HttpContextContract) {
     const payload = await request.validate(SnippetValidator);
     const snippet = await Snippet.create(payload);
-    return { id: `${snippet.snippetId}.${payload.lang}` };
+    return { id: snippet.snippetId, ext: payload.lang };
   }
 
   public async show({ params }: HttpContextContract) {
     const [snippetId, ext] = params.id.split(".");
     const code = await Snippet.findBy("snippet_id", snippetId);
+    // @ts-ignore
+    if (code.lang !== null) {
+      code!.lang = extToLang[ext];
+    }
     if (!code) {
       return { error: "This snippet doesn't exist." };
     }
 
-    return { code, length: code.code.split("\n").length, lang: extToLang[ext] };
+    return { code, length: code.code.split("\n").length, ext: ext };
   }
 }
 
